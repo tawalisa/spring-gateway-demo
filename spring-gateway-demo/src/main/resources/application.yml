@@ -1,0 +1,12 @@
+server:
+  port: 9999
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: rewritepath_route
+          uri: http://localhost:8080
+          predicates:
+            - Path=/red/**
+          filters:
+            - RewritePath=/(?<segment>/?.*), /app/$\{segment}
